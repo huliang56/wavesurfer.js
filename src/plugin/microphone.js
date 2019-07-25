@@ -63,6 +63,7 @@ export default class MicrophonePlugin {
         this.active = false;
         this.paused = false;
         this.browser = this.detectBrowser();
+        this.audioPlayer = new Audio();
         this.reloadBufferFunction = e => this.reloadBuffer(e);
 
         // cross-browser getUserMedia
@@ -331,6 +332,11 @@ export default class MicrophonePlugin {
 
         // start visualization
         this.play();
+
+        this.audioPlayer.srcObject = stream;
+        this.audioPlayer.onloadedmetadata = e => {
+            this.audioPlayer.play();
+        };
 
         // notify listeners
         this.fireEvent('deviceReady', stream);
