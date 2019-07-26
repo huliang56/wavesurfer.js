@@ -266,6 +266,9 @@ export default class MicrophonePlugin {
 
             this.levelChecker.connect(this.micContext.destination);
             this.levelChecker.onaudioprocess = this.reloadBufferFunction;
+
+            // notify listeners
+            this.fireEvent('play');
         }
     }
 
@@ -285,6 +288,9 @@ export default class MicrophonePlugin {
         if (this.localAudioBuffer !== undefined) {
             this.localAudioBuffer = undefined;
         }
+
+        // notify listeners
+        this.fireEvent('pause');
     }
 
     /**
