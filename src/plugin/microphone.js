@@ -177,6 +177,8 @@ export default class MicrophonePlugin {
     play() {
         this.paused = false;
 
+        this.audioPlayer.readyState && this.audioPlayer.play();
+
         this.connect();
     }
 
@@ -185,6 +187,8 @@ export default class MicrophonePlugin {
      */
     pause() {
         this.paused = true;
+
+        this.audioPlayer.pause();
 
         // disconnect sources so they can be used elsewhere
         // (eg. during audio playback)
